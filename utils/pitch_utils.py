@@ -61,10 +61,20 @@ def norm_interp_f0(f0, hparams):
 
 
 def denorm_f0(f0, uv, hparams, pitch_padding=None, min=None, max=None):
+     # 1) Normalize or skip
     if hparams['pitch_norm'] == 'standard':
+        # requires f0_mean & f0_std in your YAML
         f0 = f0 * hparams['f0_std'] + hparams['f0_mean']
-    if hparams['pitch_norm'] == 'log':
+    elif hparams['pitch_norm'] == 'log':
         f0 = 2 ** f0
+    # elif hparams['pitch_norm'] == 'none':
+    #     leave f0 as‑is
+
+    # 2) Apply your pitch shift
+    semis = float(hparams.get('pitch_shift_semitones', 0.0))
+    if semis != 0.0:
+        f0 = f0 * (2 ** (semis / 12.0))
+
     if min is not None:
         f0 = f0.clamp(min=min)
     if max is not None:
