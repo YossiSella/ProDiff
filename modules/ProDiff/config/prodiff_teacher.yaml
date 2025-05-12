@@ -12,11 +12,14 @@ task_cls: modules.ProDiff.task.ProDiff_teacher_task.ProDiff_teacher_Task
 #   standard = (f0*f0_std + f0_mean), log = 2**f0, none = leave raw f0
 pitch_norm: 'none'            # choose 'standard', 'log', or 'none'
 
+f0_std:  45
+f0_mean: 220
+
 # Two mutually‑exclusive ways to shift pitch:
 #  • Linear scale: >1.0 = higher, <1.0 = lower
 pitch_scale: 1.2              
 #  • Semitone shift: positive = up, negative = down
-pitch_shift_semitones: 3.0    
+pitch_shift_semitones: 12.0    
 
 # If you ever want to use standard norm, you must supply these:
 # f0_mean: 110.0
