@@ -3,7 +3,7 @@ import re
 
 import gradio as gr
 import yaml
-from gradio.inputs import Textbox
+# from gradio.inputs import Textbox
 
 from inference.base_tts_infer import BaseTTSInfer
 from utils.hparams import set_hparams
@@ -51,16 +51,15 @@ class GradioInfer:
         self.infer_ins: BaseTTSInfer = infer_cls(hp)
         example_inputs = self.example_inputs
         iface = gr.Interface(fn=self.greet,
-                             inputs=Textbox(
-                                 lines=10, placeholder=None, default=example_inputs[0], label="input text"),
+                             inputs=gr.Textbox(
+                                 lines=10, placeholder="", value=example_inputs[0], label="input text"),
                              outputs="audio",
                              allow_flagging="never",
                              title=self.title,
                              description=self.description,
                              article=self.article,
-                             examples=example_inputs,
-                             enable_queue=True)
-        iface.launch(share=True,cache_examples=True)
+                             examples=example_inputs)
+        iface.launch(share=True)
 
 
 if __name__ == '__main__':
