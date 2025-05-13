@@ -38,7 +38,7 @@ def set_hparams(config='', exp_name='', hparams_str='', print_hparams=True, glob
         args, unknown = parser.parse_known_args()
     else:
         args = Args(config=config, exp_name=exp_name, hparams=hparams_str,
-                    infer=False, validate=False, reset=False, debug=False)
+                    infer=False, validate=False, reset=False, remove=False, debug=False)
     global hparams
     assert args.config != '' or args.exp_name != ''
 
